@@ -1,11 +1,15 @@
 "use server";
 import axios from "axios";
+import { revalidatePath } from "next/cache";
 
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 
 
-export async function login(email: string, password: string){
+export async function login(formData: FormData){
+
+  const email = formData.get("email");
+  const password = formData.get("password");
   try {
     const response = await axios.post("http://127.0.0.1:8000/api/login", {
       email,
@@ -18,10 +22,11 @@ export async function login(email: string, password: string){
       maxAge: expires_in,
     });
 
-    return response.data;
   } catch (error: any) {
-    console.log(error?.response?.data.error);
     return error?.response?.data.error;
   }
+
+  revalidatePath("/login");
+  redirect("/dashboard");
 
 }

@@ -1,8 +1,6 @@
-import EmployeeButton from "./components/Employee-button";
-import Form from "./components/Form";
-import HrdButton from "./components/Hrd-button";
+import React from "react";
 
-export default function LoginPage() {
+export default function layout({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex max-h-screen min-h-screen min-w-full items-center justify-center bg-[#94D9F8]">
       <div
@@ -13,16 +11,7 @@ export default function LoginPage() {
       >
         <div className="min-w-96 max-w-screen-sm rounded-2xl bg-white p-10">
           <h1 className="text-center text-2xl font-bold">RAI - HRIS</h1>
-          <div className="mt-14 flex flex-col font-bold">
-            <span>Welcome Back.</span>
-            <span>Sign In</span>
-          </div>
-
-          <Form />
-          <div className="mt-4 flex gap-2">
-            <HrdButton />
-            <EmployeeButton />
-          </div>
+          <main>{children}</main>
         </div>
       </div>
     </div>
