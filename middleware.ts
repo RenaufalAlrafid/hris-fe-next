@@ -3,7 +3,7 @@ import type { NextRequest } from 'next/server'
  
 export function middleware(request: NextRequest) {
   if (request.nextUrl.pathname.startsWith('/login') || request.nextUrl.pathname.startsWith('/register')) {
-    if (request.cookies.has('token')) {
+    if (request.cookies.has("token")) {
       return NextResponse.redirect(new URL('/dashboard', request.nextUrl))
     } else {
       return NextResponse.next()
@@ -12,7 +12,7 @@ export function middleware(request: NextRequest) {
     return NextResponse.next()
   
   } else {
-    if (!request.cookies.has('token')) {
+    if (!request.cookies.has("token")) {
       return NextResponse.redirect(new URL('/login', request.nextUrl))
     } else {
       return NextResponse.next()

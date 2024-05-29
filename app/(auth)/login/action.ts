@@ -6,6 +6,7 @@ import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 
 
+
 export async function login(formData: FormData){
 
   const email = formData.get("email");
@@ -16,9 +17,9 @@ export async function login(formData: FormData){
       password,
     });
 
-    const {access_token,  expires_in} = response.data;
+    const {access_token, expires_in} = response.data;
 
-    cookies().set("token", `${access_token as string}`, {
+    cookies().set("token", access_token, {
       maxAge: expires_in,
     });
 
